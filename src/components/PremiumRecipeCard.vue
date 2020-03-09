@@ -14,33 +14,31 @@
         </h1>
       </div>
       <div class="row">
-        <div class="ratings">
-          ***** 200 Ratings
-        </div>
+        <ratings></ratings>
       </div>
       <div class="row stats">
         <p class="time">{{ length }}</p>
         <p class="calories">{{ calories }} Calories</p>
-        <div class="macros">
-          <span aria-label="" title="" class="red">{{ red }}</span>
-          <span aria-label="" title="" class="blue">{{ blue }}</span>
-          <span aria-label="" title="" class="yellow">{{ gold }}</span>
-        </div>
+        <macros></macros>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import macros from "./Macros";
+import ratings from "./Ratings";
+
 export default {
+  components: {
+    macros,
+    ratings
+  },
   data() {
     return {
       title: "Low Carb Thai Chicken Curry With Coconut Cauliflower Rice",
       length: "12H30M5S",
-      calories: "489",
-      red: "",
-      blue: "",
-      gold: ""
+      calories: "489"
     };
   }
 };
@@ -91,6 +89,7 @@ export default {
   .card-content {
     padding-left: 1rem;
     padding-bottom: 1rem;
+    padding-right: 1rem;
     text-align: left;
 
     h1 {
@@ -102,12 +101,15 @@ export default {
 
     .stats {
       font-size: 12px;
+      text-align: center;
 
       .time:before,
       .calories:before {
         display: inline-block;
         content: " ";
         background-size: 15px 15px;
+        background-repeat: no-repeat;
+        padding-right: 5px;
         height: 15px;
         width: 15px;
       }
