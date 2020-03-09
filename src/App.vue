@@ -7,6 +7,8 @@
       <h2>Carb Manager Dev Assignment</h2>
       <p>See the README file for assignment requirements.</p>
 
+      <p><strong>Assignment completed by Cole Gentry</strong></p>
+
       <div class="premium-recipe-wrapper">
         <PremiumRecipeCard />
       </div>
