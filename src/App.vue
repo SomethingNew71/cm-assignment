@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      energyUnits: "kJ",
+      energyUnits: "Kj",
       calories: 483,
       favorite: false,
       length: "PT3500S"

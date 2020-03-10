@@ -13,7 +13,7 @@ export const Main = () => ({
   components: { PremiumRecipeCard },
   props: {
     energyUnits: {
-      default: text("Energy Unit(kJ or calories)", "kJ")
+      default: text("Energy Unit(Kj or calories)", "Kj")
     },
     calories: {
       default: number("Amount of Calories", 483)

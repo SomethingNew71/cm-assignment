@@ -40,7 +40,9 @@
         </defs>
       </svg>
     </div>
-    <div class="total">{{ config.amountOfReviews }} Reviews</div>
+    <div class="total">
+      <span id="review-count">{{ config.amountOfReviews }}</span> Reviews
+    </div>
   </div>
 </template>
 

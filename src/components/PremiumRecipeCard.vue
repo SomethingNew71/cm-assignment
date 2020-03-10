@@ -31,9 +31,10 @@
       <div class="row stats">
         <p class="time">{{ length | duration }}</p>
         <p class="EnergyUnits" v-if="energyUnits === 'Kj'">
-          {{ calories * 4.184 }} {{ energyUnits }}
+          <span id="energy-value">{{ calories * 4.184 }}</span> {{ energyUnits }}
         </p>
-        <p class="EnergyUnits" v-else>{{ calories }} {{ energyUnits }}</p>
+        <p class="EnergyUnits" v-else>
+          <span id="energy-value">{{ calories }}</span> {{ energyUnits }}</p>
         <macros></macros>
       </div>
     </div>
