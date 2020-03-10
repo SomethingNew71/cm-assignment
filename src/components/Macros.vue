@@ -41,6 +41,8 @@ export default {
     font-size: 28px;
     height: 6px;
     width: 6px;
+    position: relative;
+    top: 3px;
   }
   .carbs:before {
     color: #f94642;

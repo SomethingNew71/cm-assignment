@@ -16,7 +16,7 @@
       />
       <div class="card-image-footer">
         <img src="../assets/trophy.svg" alt="Image of Trophy" />
-        <span>Premium Recipe</span>
+        <span> Premium Recipe</span>
       </div>
     </div>
     <div class="card-content">
@@ -167,6 +167,8 @@ export default {
         padding-right: 5px;
         height: 15px;
         width: 15px;
+        position: relative;
+        top: 3px;
       }
       .time:before {
         background-image: url(../assets/clock.svg);
