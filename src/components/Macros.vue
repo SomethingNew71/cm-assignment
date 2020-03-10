@@ -1,8 +1,16 @@
 <template>
   <div class="macros">
-    <span aria-label="" title="" class="red">{{ red }}</span>
-    <span aria-label="" title="" class="blue">{{ blue }}</span>
-    <span aria-label="" title="" class="gold">{{ gold }}</span>
+    <!-- With the Aria Labels and the titles you will get browser based tooltips providing
+    the complete name of the element when you hover. -->
+    <span aria-label="Carbs" title="Carbs" class="carbs">
+      {{ carbs }}
+    </span>
+    <span aria-label="Protien" title="Protien" class="protein">
+      {{ protein }}
+    </span>
+    <span aria-label="Fats" title="Fats" class="fats">
+      {{ fats }}
+    </span>
   </div>
 </template>
 
@@ -10,9 +18,9 @@
 export default {
   data() {
     return {
-      red: "20g",
-      blue: "16g",
-      gold: "6g"
+      carbs: "20g",
+      protein: "16g",
+      fats: "6g"
     };
   }
 }
@@ -27,9 +35,9 @@ export default {
     padding-right: 3px;
   }
 
-  .red:before,
-  .blue:before,
-  .gold:before {
+  .carbs:before,
+  .protein:before,
+  .fats:before {
     display: inline-block;
     content: "•";
     padding-right: 5px;
@@ -37,13 +45,13 @@ export default {
     height: 6px;
     width: 6px;
   }
-  .red:before {
+  .carbs:before {
     color: #f94642;
   }
-  .blue:before {
+  .protein:before {
     color: #3177bb;
   }
-  .gold:before {
+  .fats:before {
     color: #fda120;
   }
 }
