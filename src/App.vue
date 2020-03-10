@@ -10,7 +10,12 @@
       <p><strong>Assignment completed by Cole Gentry</strong></p>
 
       <div class="premium-recipe-wrapper">
-        <PremiumRecipeCard />
+        <PremiumRecipeCard
+          :energyUnits="energyUnits"
+          :calories="calories"
+          :favorite="favorite"
+          :length="length"
+        />
       </div>
     </div>
   </div>
@@ -23,6 +28,14 @@ export default {
   name: "App",
   components: {
     PremiumRecipeCard
+  },
+  data() {
+    return {
+      energyUnits: "kJ",
+      calories: 483,
+      favorite: false,
+      length: "PT3500S"
+    };
   }
 };
 </script>

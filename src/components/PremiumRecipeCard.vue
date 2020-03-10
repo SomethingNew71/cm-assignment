@@ -2,7 +2,18 @@
   <div role="link" tabindex="0" class="card" v-on:click="handleClick()">
     <div class="overlay"></div>
     <div class="card-image">
-      <img class="favorite" src="../assets/heart.svg" alt="Heart Icon" />
+      <img
+        v-if="favorite"
+        class="favorite"
+        src="../assets/heart.svg"
+        alt="Heart Icon"
+      />
+      <img
+        v-else
+        class="favorite"
+        src="../assets/heart-empty.svg"
+        alt="Heart Icon"
+      />
       <div class="card-image-footer">
         <img src="../assets/trophy.svg" alt="Image of Trophy" />
         <span>Premium Recipe</span>
@@ -11,7 +22,7 @@
     <div class="card-content">
       <div class="row">
         <h1>
-          {{ title }}
+          {{ title | truncate(66, '...') }}
         </h1>
       </div>
       <div class="row">
@@ -19,7 +30,10 @@
       </div>
       <div class="row stats">
         <p class="time">{{ length | duration }}</p>
-        <p class="EnergyUnits">{{ EnergyUnits }} EnergyUnits</p>
+        <p class="EnergyUnits" v-if="energyUnits === 'Kj'">
+          {{ calories * 4.184 }} {{ energyUnits }}
+        </p>
+        <p class="EnergyUnits" v-else>{{ calories }} {{ energyUnits }}</p>
         <macros></macros>
       </div>
     </div>
@@ -35,11 +49,15 @@ export default {
     macros,
     ratings
   },
+  props: {
+    energyUnits: String,
+    calories: Number,
+    favorite: Boolean,
+    length: String
+  },
   data() {
     return {
       title: "Low Carb Thai Chicken Curry With Coconut Cauliflower Rice",
-      length: "PT3500S",
-      EnergyUnits: "489",
       config: {
         rating: 3.7,
         amountOfReviews: 200,
@@ -54,6 +72,11 @@ export default {
     handleClick() {
       // If there was specific click handling I would run it here.
       console.log("You clicked the card!");
+    }
+  },
+  filters: {
+    truncate(text, length, suffix) {
+      return text.substring(0, length) + suffix;
     }
   }
 };

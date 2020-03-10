@@ -11,11 +11,10 @@ momentDurationFormatSetup(moment);
 typeof moment.duration.fn.format === "function";
 typeof moment.duration.format === "function";
 
-new Vue({
-  render: h => h(App)
-}).$mount("#app");
-
-// If there were more filters I would likely move these into their own file.
 Vue.filter("duration", value => {
   return moment.duration(value).format("h [hrs], m [min]");
 });
+
+new Vue({
+  render: h => h(App)
+}).$mount("#app");
