@@ -23,7 +23,7 @@ export default {
       fats: "6g"
     };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

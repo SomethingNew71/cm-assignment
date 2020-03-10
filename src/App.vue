@@ -11,6 +11,7 @@
 
       <div class="premium-recipe-wrapper">
         <PremiumRecipeCard
+          @click.native="$emit('test-click')"
           :energyUnits="energyUnits"
           :calories="calories"
           :favorite="favorite"
@@ -48,6 +49,16 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+// Global link styles
+a {
+  color: #1ba677;
+  text-decoration: none;
+
+  &:hover {
+    color: #1ba677;
+  }
 }
 </style>
 

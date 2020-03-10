@@ -1,5 +1,5 @@
 <template>
-  <div role="link" tabindex="0" class="card" v-on:click="handleClick()">
+  <div role="link" tabindex="0" class="card">
     <div class="overlay"></div>
     <div class="card-image">
       <img
@@ -31,10 +31,12 @@
       <div class="row stats">
         <p class="time">{{ length | duration }}</p>
         <p class="EnergyUnits" v-if="energyUnits === 'Kj'">
-          <span id="energy-value">{{ calories * 4.184 }}</span> {{ energyUnits }}
+          <span id="energy-value">{{ calories * 4.184 }}</span>
+          {{ energyUnits }}
         </p>
         <p class="EnergyUnits" v-else>
-          <span id="energy-value">{{ calories }}</span> {{ energyUnits }}</p>
+          <span id="energy-value">{{ calories }}</span> {{ energyUnits }}
+        </p>
         <macros></macros>
       </div>
     </div>
@@ -118,7 +120,12 @@ export default {
   }
 
   .card-image {
-    background: linear-gradient(0deg, rgba(64, 64, 64, 0.3), rgba(64, 64, 64, 0.3)), url(../assets/meal.png);
+    background: linear-gradient(
+        0deg,
+        rgba(64, 64, 64, 0.3),
+        rgba(64, 64, 64, 0.3)
+      ),
+      url(../assets/meal.png);
     height: 200px;
     position: relative;
 

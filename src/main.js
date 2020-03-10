@@ -5,8 +5,6 @@ import App from "./App.vue";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
 
-Vue.config.productionTip = false;
-
 momentDurationFormatSetup(moment);
 typeof moment.duration.fn.format === "function";
 typeof moment.duration.format === "function";
@@ -14,6 +12,8 @@ typeof moment.duration.format === "function";
 Vue.filter("duration", value => {
   return moment.duration(value).format("h [hrs], m [min]");
 });
+
+Vue.config.productionTip = false;
 
 new Vue({
   render: h => h(App)

@@ -41,7 +41,9 @@
       </svg>
     </div>
     <div class="total">
-      <span id="review-count">{{ config.amountOfReviews }}</span> Reviews
+      <a href="#">
+        <span id="review-count">{{ config.amountOfReviews }}</span> Reviews
+      </a>
     </div>
   </div>
 </template>
