@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: "proxima-nova", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -51,7 +51,7 @@ export default {
 }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
 .cm-logo-wrapper {
   margin-bottom: 30px;
 }

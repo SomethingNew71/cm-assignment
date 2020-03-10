@@ -12,7 +12,10 @@ export default {
 export const Default = () => ({
   components: { PremiumRecipeCard },
   props: {
-    // Add your props here and hook them up to the template below
+    energyUnits: String,
+    calories: Number,
+    favorite: Boolean,
+    length: String
   },
   template: '<PremiumRecipeCard @click="action" />',
   methods: { action: action("clicked") }
