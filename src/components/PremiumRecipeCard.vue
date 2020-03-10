@@ -97,7 +97,7 @@ export default {
   position: relative;
 
   .overlay {
-    background: rgba(66, 66, 66, 0.4);
+    background: rgba(255, 255, 255, 0.2);
     z-index: 1;
     height: 100%;
     width: 100%;
