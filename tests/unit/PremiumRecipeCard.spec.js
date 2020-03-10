@@ -15,6 +15,8 @@ describe("PremiumRecipeCard.vue", () => {
       }
     });
     const DOMValue = parseInt(wrapper.find("#energy-value").text());
+    // You will notice a console error regarding the duration filter I use. I felt as though
+    // it shouldnt be included in this test so I decided to omit it form the top level imports.
     console.log("DOM Value", DOMValue);
     console.log("Test Value", kjConversion);
     expect(DOMValue).toEqual(kjConversion);
