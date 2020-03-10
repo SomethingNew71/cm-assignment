@@ -15,11 +15,11 @@
         </h1>
       </div>
       <div class="row">
-        <ratings></ratings>
+        <ratings :config="config"></ratings>
       </div>
       <div class="row stats">
-        <p class="time">{{ length }}</p>
-        <p class="calories">{{ calories }} Calories</p>
+        <p class="time">{{ length | duration }}</p>
+        <p class="EnergyUnits">{{ EnergyUnits }} EnergyUnits</p>
         <macros></macros>
       </div>
     </div>
@@ -38,8 +38,16 @@ export default {
   data() {
     return {
       title: "Low Carb Thai Chicken Curry With Coconut Cauliflower Rice",
-      length: "12H30M5S",
-      calories: "489"
+      length: "PT3500S",
+      EnergyUnits: "489",
+      config: {
+        rating: 3.7,
+        amountOfReviews: 200,
+        style: {
+          fullStarColor: "#ed8a19",
+          emptyStarColor: "#737373"
+        }
+      }
     };
   },
   methods: {
@@ -131,7 +139,7 @@ export default {
       text-align: center;
 
       .time:before,
-      .calories:before {
+      .EnergyUnits:before {
         display: inline-block;
         content: " ";
         background-size: 15px 15px;
@@ -143,7 +151,7 @@ export default {
       .time:before {
         background-image: url(../assets/clock.svg);
       }
-      .calories:before {
+      .EnergyUnits:before {
         background-image: url(../assets/flame.svg);
       }
     }
