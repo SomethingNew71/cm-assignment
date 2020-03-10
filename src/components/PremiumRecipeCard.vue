@@ -1,5 +1,6 @@
 <template>
-  <div class="card">
+  <div role="link" tabindex="0" class="card" v-on:click="handleClick()">
+    <div class="overlay"></div>
     <div class="card-image">
       <img class="favorite" src="../assets/heart.svg" alt="Heart Icon" />
       <div class="card-image-footer">
@@ -40,6 +41,12 @@ export default {
       length: "12H30M5S",
       calories: "489"
     };
+  },
+  methods: {
+    handleClick() {
+      // If there was specific click handling I would run it here.
+      console.log("You clicked the card!");
+    }
   }
 };
 </script>
@@ -52,6 +59,26 @@ export default {
   overflow: hidden;
   max-width: 340px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  position: relative;
+
+  .overlay {
+    background: rgba(66, 66, 66, 0.4);
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding: 0;
+    transition: opacity 0.5s;
+
+    &:hover {
+      opacity: 0.9;
+      transition: opacity 0.5s;
+    }
+  }
 
   .row {
     display: flex;
