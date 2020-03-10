@@ -28,9 +28,6 @@ export default {
 
 <style lang="scss" scoped>
 .macros {
-  margin-top: 12px;
-  margin-bottom: 12px;
-
   span {
     padding-right: 3px;
   }
@@ -41,7 +38,7 @@ export default {
     display: inline-block;
     content: "•";
     padding-right: 5px;
-    font-size: 16px;
+    font-size: 28px;
     height: 6px;
     width: 6px;
   }
