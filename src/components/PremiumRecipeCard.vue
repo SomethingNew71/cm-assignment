@@ -22,7 +22,7 @@
     <div class="card-content">
       <div class="row">
         <h1>
-          {{ title | truncate(66, '...') }}
+          {{ title | truncate(66, "...") }}
         </h1>
       </div>
       <div class="row">
@@ -117,11 +117,7 @@ export default {
   }
 
   .card-image {
-    background: linear-gradient(
-        0deg,
-        rgba(64, 64, 64, 0.3) rgba(64, 64, 64, 0.3)
-      ),
-      url(../assets/meal.png);
+    background: linear-gradient(0deg, rgba(64, 64, 64, 0.3), rgba(64, 64, 64, 0.3)), url(../assets/meal.png);
     height: 200px;
     position: relative;
 

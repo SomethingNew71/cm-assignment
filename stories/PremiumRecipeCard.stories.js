@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import { withKnobs } from "@storybook/addon-knobs";
+import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 
 import PremiumRecipeCard from "../src/components/PremiumRecipeCard.vue";
 
@@ -9,14 +9,28 @@ export default {
   decorators: [withKnobs]
 };
 
-export const Default = () => ({
+export const Main = () => ({
   components: { PremiumRecipeCard },
   props: {
-    energyUnits: String,
-    calories: Number,
-    favorite: Boolean,
-    length: String
+    energyUnits: {
+      default: text("Energy Unit(kJ or calories)", "kJ")
+    },
+    calories: {
+      default: number("Amount of Calories", 483)
+    },
+    favorite: {
+      default: boolean("Is favorite?", false)
+    },
+    length: {
+      default: text("ISO_8601 Timestamp", "PT3500S")
+    }
   },
-  template: '<PremiumRecipeCard @click="action" />',
+  template: `
+    <PremiumRecipeCard
+      :energyUnits="energyUnits"
+      :calories="calories"
+      :favorite="favorite"
+      :length="length"
+    />`,
   methods: { action: action("clicked") }
 });
