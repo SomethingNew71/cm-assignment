@@ -10,12 +10,17 @@
       <p><strong>Assignment completed by Cole Gentry</strong></p>
 
       <div class="premium-recipe-wrapper">
-        <PremiumRecipeCard
+        <RecipeCard
+          v-for="(recipe, index) in recipes"
+          :key="index"
+          :cardType="recipe.cardType"
           @click.native="$emit('test-click')"
-          :energyUnits="energyUnits"
-          :calories="calories"
-          :favorite="favorite"
-          :length="length"
+          :energyUnits="recipe.energyUnits"
+          :calories="recipe.calories"
+          :favorite="recipe.favorite"
+          :length="recipe.length"
+          :title="recipe.title"
+          :ratings="recipe.ratings"
         />
       </div>
     </div>
@@ -23,19 +28,51 @@
 </template>
 
 <script>
-import PremiumRecipeCard from "./components/PremiumRecipeCard.vue";
+import RecipeCard from "./components/RecipeCard.vue";
 
 export default {
   name: "App",
   components: {
-    PremiumRecipeCard
+    RecipeCard
   },
   data() {
     return {
-      energyUnits: "Kj",
-      calories: 483,
-      favorite: false,
-      length: "PT3500S"
+      recipes: [
+        {
+          cardType: "full",
+          energyUnits: "Kj",
+          calories: 483,
+          favorite: false,
+          length: "PT3500S",
+          title: "Low Carb Thai Chicken Curry with Coconut Cauliflower Rice",
+          ratings: {
+            rating: 3.7,
+            amountOfReviews: 200,
+            style: {
+              fullStarColor: "#ed8a19",
+              emptyStarColor: "#737373"
+            },
+            showReviewCount: true
+          }
+        },
+        {
+          cardType: "compact",
+          energyUnits: "Kj",
+          calories: 483,
+          favorite: false,
+          length: "PT3500S",
+          title: "Keto Italian Beef With Cabbage Noodles",
+          ratings: {
+            rating: 4.2,
+            amountOfReviews: 963,
+            style: {
+              fullStarColor: "#ed8a19",
+              emptyStarColor: "#FFF"
+            },
+            showReviewCount: false
+          }
+        }
+      ]
     };
   }
 };
@@ -79,6 +116,7 @@ a {
 
 /** Remove these styles when done */
 .premium-recipe-wrapper {
+  display: flex;
   margin-top: 100px;
   border: 2px dashed red;
   padding: 16px;

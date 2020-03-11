@@ -40,7 +40,7 @@
         </defs>
       </svg>
     </div>
-    <div class="total">
+    <div class="total" v-if="config.showReviewCount">
       <a href="#">
         <span id="review-count">{{ config.amountOfReviews }}</span> Reviews
       </a>

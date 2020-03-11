@@ -1,12 +1,12 @@
 import { shallowMount } from "@vue/test-utils";
-import PremiumRecipeCard from "../../src/components/PremiumRecipeCard.vue";
+import RecipeCard from "../../src/components/RecipeCard.vue";
 
-describe("PremiumRecipeCard.vue", () => {
+describe("RecipeCard.vue", () => {
   test("Validate the Kj value", () => {
     const caloriesTestVal = 930;
     const kjConversion = parseInt(caloriesTestVal * 4.184);
 
-    const wrapper = shallowMount(PremiumRecipeCard, {
+    const wrapper = shallowMount(RecipeCard, {
       propsData: {
         energyUnits: "Kj",
         calories: caloriesTestVal,

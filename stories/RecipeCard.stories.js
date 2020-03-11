@@ -11,16 +11,16 @@ import Vue from "vue";
 Vue.filter("duration", value => {
   return moment.duration(value).format("h [hrs], m [min]");
 });
-import PremiumRecipeCard from "../src/components/PremiumRecipeCard.vue";
+import RecipeCard from "../src/components/RecipeCard.vue";
 
 export default {
-  title: "PremiumRecipeCard",
-  component: PremiumRecipeCard,
+  title: "RecipeCard",
+  component: RecipeCard,
   decorators: [withKnobs]
 };
 
 export const Main = () => ({
-  components: { PremiumRecipeCard },
+  components: { RecipeCard },
   props: {
     energyUnits: {
       default: text("Energy Unit(Kj or calories)", "Kj")
@@ -38,7 +38,7 @@ export const Main = () => ({
   // I have this @click configured to their documentation however I was not able to get the action to trigger.
   // I am thinking I am missing something very obvious here.
   template: `
-    <PremiumRecipeCard
+    <RecipeCard
       @click="log"
       :energyUnits="energyUnits"
       :calories="calories"
