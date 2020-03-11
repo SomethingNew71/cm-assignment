@@ -33,6 +33,9 @@
             <span id="energy-value">{{ calories * 4.184 }}</span>
             {{ energyUnits }}
           </p>
+          <p class="energy-units" v-else>
+            <span id="energy-value">{{ calories }} </span> {{ energyUnits }}
+          </p>
         </div>
       </div>
 

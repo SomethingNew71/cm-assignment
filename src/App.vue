@@ -57,7 +57,7 @@ export default {
         },
         {
           cardType: "compact",
-          energyUnits: "Kj",
+          energyUnits: "calories",
           calories: 483,
           favorite: false,
           length: "PT3500S",
