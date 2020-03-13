@@ -15,14 +15,34 @@ a {
     color: $brandColor;
   }
 }
+h1,
+h2,
+p {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+}
 
+.brand-button,
+.brand-button {
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: white;
+  font-size: 12px;
 
-// Truncation helper
-.truncate-overflow {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
+  &.dark {
+    background: rgba(64, 64, 64, 0.5);
+  }
+  &.light {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+// Basic row styles
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
 // Overlay helper
@@ -40,6 +60,5 @@ a {
 
   &:hover {
     opacity: 0.9;
-    transition: opacity 0.5s;
   }
 }

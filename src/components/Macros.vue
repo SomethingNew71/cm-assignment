@@ -29,6 +29,7 @@ export default {
   // Normalized the padding and margin to allow card to determine sizing.
   margin: 0;
   padding-left: 0;
+  font-size: 12px;
 
   .icon {
     display: inline;

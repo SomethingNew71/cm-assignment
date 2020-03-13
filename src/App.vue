@@ -26,6 +26,7 @@
           :carbs="recipe.carbs"
           :protein="recipe.protein"
           :fats="recipe.fats"
+          :previewImage="recipe.previewImage"
         />
       </div>
     </div>
@@ -54,7 +55,8 @@ export default {
           reviewAmount: 200,
           carbs: "20g",
           protein: "16g",
-          fats: "6g"
+          fats: "6g",
+          previewImage: "../assets/meal.png"
         },
         {
           cardType: "compact",
@@ -67,7 +69,8 @@ export default {
           reviewAmount: 200,
           carbs: "40g",
           protein: "200g",
-          fats: "5g"
+          fats: "5g",
+          previewImage: "../assets/meal.png"
         }
       ]
     };
@@ -93,6 +96,7 @@ export default {
 /** Remove these styles when done */
 .premium-recipe-wrapper {
   display: flex;
+  flex-flow: wrap;
   margin-top: 100px;
   border: 2px dashed red;
   padding: 16px;

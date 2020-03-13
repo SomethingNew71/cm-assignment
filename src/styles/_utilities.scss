@@ -1,0 +1,51 @@
+// Text Color helpers.
+.text-color-brand {
+  color: $brandColor;
+}
+.text-color-standard {
+ color: $fontColor;
+}
+.text-color-white {
+  color: $white;
+}
+
+// Text style helpers
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-bold {
+  font-weight: bold;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+// Truncation helper
+.truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+// Padding and Marigin Helpers I usually use in larger projects
+// example: p-l-10
+$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100);
+$sides: (top, bottom, left, right);
+
+@each $space in $spaceamounts {
+  @each $side in $sides {
+    .m-#{str-slice($side, 0, 1)}-#{$space} {
+      margin-#{$side}: #{$space}px;
+    }
+    .p-#{str-slice($side, 0, 1)}-#{$space} {
+      padding-#{$side}: #{$space}px;
+    }
+  }
+}

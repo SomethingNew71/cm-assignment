@@ -6,26 +6,39 @@
     :class="{ compact: cardType === 'compact' }"
   >
     <div class="overlay"></div>
-    <div class="card-image">
+    <div class="card-image p-l-10">
+      <!-- <div
+        class="card-image"
+        v-bind:style="{
+          background: `linear-gradient(
+            0deg,
+            rgba(64, 64, 64, 0.3),
+            rgba(64, 64, 64, 0.3)
+          ),
+          url(${previewImage})`
+        }"
+      > -->
       <!-- Full card image layout for premium recipe card -->
       <div v-if="cardType === 'full'" class="card-image-header">
-        <img
-          v-if="favorite"
-          class="favorite"
-          src="../assets/heart.svg"
-          alt="Heart Icon"
-        />
-        <img
-          v-else
-          class="favorite"
-          src="../assets/heart-empty.svg"
-          alt="Heart Icon"
-        />
+        <div class="row">
+          <img
+            v-if="favorite"
+            class="favorite p-t-15 p-r-15"
+            src="../assets/heart.svg"
+            alt="Heart Icon"
+          />
+          <img
+            v-else
+            class="favorite p-t-15 p-r-15"
+            src="../assets/heart-empty.svg"
+            alt="Heart Icon"
+          />
+        </div>
       </div>
       <!-- Compact card image layout for recipe of the day card -->
       <div v-else-if="cardType === 'compact'" class="card-image-header">
-        <h1>RECIPE OF THE DAY</h1>
-        <h2 class="truncate-overflow">{{ title }}</h2>
+        <h1 class="text-uppercase">Recipe of the Day</h1>
+        <h2 class="truncate">{{ title }}</h2>
         <ratings
           :rating="rating"
           :reviewAmount="reviewAmount"
@@ -44,10 +57,16 @@
       </div>
 
       <!-- Full card Link layout for premium recipe card -->
-      <div v-if="cardType === 'full'" class="card-image-footer">
-        <img src="../assets/trophy.svg" alt="Image of Trophy" />
-        <span> Premium Recipe</span>
+      <div
+        v-if="cardType === 'full'"
+        class="card-image-footer row p-l-15 p-b-15 "
+      >
+        <div class="premium-recipe brand-button light">
+          <img src="../assets/trophy.svg" alt="Image of Trophy" />
+          <span> Premium Recipe</span>
+        </div>
       </div>
+
       <!-- Compact card Link layout for recipe of the day card -->
       <div v-else-if="cardType === 'compact'" class="card-image-footer">
         <macros :carbs="carbs" :protein="protein" :fats="fats" />
@@ -56,19 +75,17 @@
     </div>
 
     <!-- Only show the bottom contents if its the full card -->
-    <div v-if="cardType === 'full'" class="card-content">
-      <div class="row">
-        <h1 class="truncate-overflow">
-          {{ title }}
-        </h1>
+    <div v-if="cardType === 'full'" class="card-content p-l-10 p-t-10">
+      <div class="row text-left">
+        <h1 class="truncate">{{ title }}</h1>
       </div>
       <div class="row">
         <ratings :rating="rating" :reviewAmount="reviewAmount" />
       </div>
-      <div class="row stats">
-        <p class="time">{{ length | duration }}</p>
-        <p class="energy-units" v-if="energyUnits === 'Kj'">
-          <span id="energy-value">{{ calories * 4.184 }}</span>
+      <div class="row stats p-b-15 p-r-10">
+        <p class="icon time">{{ length | duration }}</p>
+        <p class="icon energy-units p-l-10" v-if="energyUnits === 'Kj'">
+          <span id="energy-value">{{ convertedCalories }}</span>
           {{ energyUnits }}
         </p>
         <p class="energy-units" v-else>
@@ -83,6 +100,7 @@
 <script>
 import macros from "./Macros";
 import ratings from "./Ratings";
+import { convertCaloriesToKJ } from "@/utils";
 
 export default {
   components: {
@@ -90,8 +108,18 @@ export default {
     ratings
   },
   props: {
-    cardType: String,
-    energyUnits: String,
+    cardType: {
+      type: String,
+      validator: value => {
+        return value === "compact" || value === "full";
+      }
+    },
+    energyUnits: {
+      type: String,
+      validator: value => {
+        return value === "calories" || value === "Kj";
+      }
+    },
     calories: Number,
     favorite: Boolean,
     length: String,
@@ -100,7 +128,14 @@ export default {
     reviewAmount: Number,
     carbs: String,
     protein: String,
-    fats: String
+    fats: String,
+    previewImage: String
+  },
+  computed: {
+    convertedCalories() {
+      // Compute this value at the beginning instead of in the template
+      return convertCaloriesToKJ(this.calories);
+    }
   }
 };
 </script>
@@ -111,65 +146,79 @@ export default {
   margin: auto;
   border-radius: 12px;
   overflow: hidden;
-  max-width: 340px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
   position: relative;
-
-  .row {
-    display: flex;
-    justify-content: space-between;
-  }
+  max-width: 340px;
 
   .stats {
     font-size: 12px;
     text-align: center;
 
-    .time:before,
-    .energy-units:before {
-      display: inline-block;
-      content: " ";
-      background-size: 15px 15px;
-      background-repeat: no-repeat;
-      padding-right: 5px;
-      height: 15px;
-      width: 15px;
-      position: relative;
-      top: 3px;
+    .icon {
+      &:before {
+        display: inline-block;
+        content: " ";
+        background-size: 15px 15px;
+        background-repeat: no-repeat;
+        padding-right: 5px;
+        height: 15px;
+        width: 15px;
+        position: relative;
+        top: 3px;
+      }
+      &.time:before {
+        background-image: url(../assets/clock.svg);
+      }
+      &.energy-units:before {
+        background-image: url(../assets/flame.svg);
+      }
     }
-    .time:before {
-      background-image: url(../assets/clock.svg);
+    .macros {
+      margin-left: auto;
     }
-    .energy-units:before {
-      background-image: url(../assets/flame.svg);
+  }
+  .card-image {
+    background: linear-gradient(
+        0deg,
+        rgba(64, 64, 64, 0.3),
+        rgba(64, 64, 64, 0.3)
+      ),
+      url(../assets/meal.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
+    position: relative;
+
+    .favorite {
+      position: absolute;
+      right: 0;
+    }
+
+    .card-image-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .card-content {
+    h1 {
+      font-size: 18px;
     }
   }
 
   &.compact {
+    color: $white;
+
     .card-image {
-      background: linear-gradient(
-          0deg,
-          rgba(64, 64, 64, 0.6),
-          rgba(64, 64, 64, 0.6)
-        ),
-        url(../assets/meal.png);
-
       .card-image-header {
-        padding-top: 15px;
-        padding-left: 15px;
-
         h1 {
-          color: $brandColor;
-          margin: 0;
-          font-style: normal;
-          font-weight: bold;
           font-size: 16px;
-          text-align: left;
+          color: $brandColor;
         }
         h2 {
-          margin: 0;
-          color: $white;
-          text-align: left;
           font-size: 20px;
         }
 
@@ -179,9 +228,6 @@ export default {
 
           .time,
           .energy-units {
-            margin-top: 0;
-            padding-top: 5px;
-            color: $white;
             display: flex;
             flex-flow: row;
             justify-content: space-between;
@@ -203,9 +249,7 @@ export default {
       .card-image-footer {
         display: flex;
         background-color: rgba(64, 64, 64, 0);
-        margin: 0;
         width: 100%;
-        padding: 0;
         flex-flow: row;
         align-items: baseline;
         justify-content: space-between;
@@ -215,58 +259,7 @@ export default {
           color: $white;
           display: flex;
         }
-
-        a {
-          background-color: rgba(255, 255, 255, 0.4);
-          padding: 5px 15px;
-          border-radius: 15px;
-          margin-right: 15px;
-          margin-bottom: 10px;
-        }
       }
-    }
-  }
-
-  .card-image {
-    background: linear-gradient(
-        0deg,
-        rgba(64, 64, 64, 0.3),
-        rgba(64, 64, 64, 0.3)
-      ),
-      url(../assets/meal.png);
-    height: 200px;
-    width: 340px;
-    position: relative;
-
-    .favorite {
-      position: absolute;
-      right: 0;
-      padding-right: 15px;
-      padding-top: 15px;
-    }
-
-    .card-image-footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      background: rgba(64, 64, 64, 0.3);
-      border-radius: 12px;
-      padding: 2px 10px 2px 10px;
-      margin: 12px;
-      color: $white;
-    }
-  }
-
-  .card-content {
-    padding-left: 1rem;
-    padding-bottom: 1rem;
-    padding-right: 1rem;
-    text-align: left;
-
-    h1 {
-      font-style: normal;
-      font-weight: bold;
-      font-size: 18px;
     }
   }
 }
