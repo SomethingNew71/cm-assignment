@@ -22,6 +22,7 @@
           :title="recipe.title"
           :rating="recipe.rating"
           :reviewAmount="recipe.reviewAmount"
+          :showReviewCount="recipe.showReviewCount"
           :macros="recipe.macros"
           :carbs="recipe.carbs"
           :protein="recipe.protein"
@@ -53,6 +54,7 @@ export default {
           title: "Low Carb Thai Chicken Curry with Coconut Cauliflower Rice",
           rating: 2.5,
           reviewAmount: 200,
+          showReviewCount: true,
           carbs: "20g",
           protein: "16g",
           fats: "6g",
@@ -66,11 +68,12 @@ export default {
           length: "74",
           title: "Keto Italian Beef With Cabbage Noodles",
           rating: 4.5,
+          showReviewCount: false,
           reviewAmount: 200,
           carbs: "40g",
           protein: "200g",
           fats: "5g",
-          previewImage: "../assets/meal.png"
+          previewImage: "../assets/ketobeef.jpg"
         }
       ]
     };

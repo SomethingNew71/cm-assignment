@@ -30,6 +30,7 @@ export default {
   margin: 0;
   padding-left: 0;
   font-size: 12px;
+  line-height: 12px;
 
   .icon {
     display: inline;

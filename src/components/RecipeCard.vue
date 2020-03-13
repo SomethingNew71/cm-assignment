@@ -7,17 +7,6 @@
   >
     <div class="overlay"></div>
     <div class="card-image p-l-10">
-      <!-- <div
-        class="card-image"
-        v-bind:style="{
-          background: `linear-gradient(
-            0deg,
-            rgba(64, 64, 64, 0.3),
-            rgba(64, 64, 64, 0.3)
-          ),
-          url(${previewImage})`
-        }"
-      > -->
       <!-- Full card image layout for premium recipe card -->
       <div v-if="cardType === 'full'" class="card-image-header">
         <div class="row">
@@ -42,15 +31,18 @@
       >
         <h1 class="text-uppercase">Recipe of the Day</h1>
         <h2 class="truncate">{{ title }}</h2>
-        <!-- <ratings name="Test" /> -->
+        <ratings :rating="rating" />
+        <a href="#" class="total-review-count" v-if="showReviewCount">
+          {{ reviewAmount }} Reviews
+        </a>
         <div class="stats">
           <p class="icon time">{{ prettyDuration }}</p>
           <p class="icon energy-units" v-if="energyMeasurement === 'Kj'">
-            <span id="energy-value">{{ convertCaloriesToKJ }}</span>
+            <span>{{ convertCaloriesToKJ }}</span>
             {{ energyMeasurement }}
           </p>
           <p class="icon energy-units" v-else>
-            <span id="energy-value">{{ calories }} </span>
+            <span class="p-r-5">{{ calories }}</span>
             {{ energyMeasurement }}
           </p>
         </div>
@@ -81,17 +73,21 @@
       <div class="row text-left">
         <h1 class="truncate">{{ title }}</h1>
       </div>
-      <div class="row">
+      <div class="row p-t-10">
         <ratings :rating="rating" />
+        <a href="#" class="total-review-count p-l-10" v-if="showReviewCount">
+          {{ reviewAmount }} Reviews
+        </a>
       </div>
       <div class="row stats p-b-15 p-r-10">
         <p class="icon time">{{ prettyDuration }}</p>
         <p class="icon energy-units p-l-10" v-if="energyMeasurement === 'Kj'">
-          <span id="energy-value">{{ convertedCalories }}</span>
+          <span>{{ convertedCalories }}</span>
           {{ energyMeasurement }}
         </p>
         <p class="icon energy-units" v-else>
-          <span id="energy-value">{{ calories }}</span> {{ energyMeasurement }}
+          <span class="p-r-5">{{ calories }}</span>
+          {{ energyMeasurement }}
         </p>
         <macros :carbs="carbs" :protein="protein" :fats="fats" />
       </div>
@@ -128,6 +124,7 @@ export default {
     title: String,
     rating: Number,
     reviewAmount: Number,
+    showReviewCount: Boolean,
     carbs: String,
     protein: String,
     fats: String,
@@ -144,6 +141,17 @@ export default {
       // its used as a standard across front end apps.
       return calculateDuration(this.length);
     }
+    // computeBackgrounds() {
+    // Super interesting behavior I have found here regarding the way Webpack
+    // decides to import images. If you allow Webpack to treeshake, you have to
+    // require() an image in order to use it in a bound property. Even more
+    // interestingly thge first require works while the second doesnt, even
+    // though they are both strings.
+
+    //   console.log(this.previewImage);
+    //   return require('../assets/meal.png');
+    //   return require(`${this.previewImage}`);
+    // }
   }
 };
 </script>
@@ -211,6 +219,10 @@ export default {
     h1 {
       font-size: 18px;
     }
+    .total-review-count {
+      font-size: 14px;
+      margin-right: auto;
+    }
   }
 
   &.compact {
@@ -218,7 +230,9 @@ export default {
 
     .card-image {
       background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url(../assets/meal.png);
+        url(../assets/ketobeef.jpg);
+      background-position: right;
+
       .card-image-header {
         h1 {
           font-size: 16px;

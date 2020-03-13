@@ -53,8 +53,10 @@ export default {
         starArray.push("half");
       }
       // Determine the amount of empty stars
-      for (let index = 0; index < 6 - starArray.length; index++) {
-        starArray.push("empty");
+      if (starArray.length < 4) {
+        for (let index = 0; index <= 5 - starArray.length; index++) {
+          starArray.push("empty");
+        }
       }
       // Return the final reference array to loop through
       return starArray;
