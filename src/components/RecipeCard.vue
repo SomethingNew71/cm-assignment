@@ -101,7 +101,7 @@
 <script>
 import macros from "./Macros";
 import ratings from "./Ratings";
-import { convertCaloriesToKJ, calculateDuration } from "@/utils";
+import { convertCaloriesToKJ, calculateDuration } from "../utils";
 
 export default {
   components: {
