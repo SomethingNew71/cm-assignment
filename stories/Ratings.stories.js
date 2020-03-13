@@ -1,4 +1,4 @@
-import { withKnobs, object } from "@storybook/addon-knobs";
+import { withKnobs, number } from "@storybook/addon-knobs";
 
 import Ratings from "../src/components/Ratings.vue";
 
@@ -10,16 +10,9 @@ export default {
 export const Main = () => ({
   components: { Ratings },
   props: {
-    config: {
-      default: object("Values", {
-        rating: 2.5,
-        amountOfReviews: 740,
-        style: {
-          fullStarColor: "#ed8a19",
-          emptyStarColor: "#737373"
-        }
-      })
+    rating: {
+      default: number("Amount of Calories", 4.0)
     }
   },
-  template: "<ratings :config='config'></ratings>"
+  template: "<ratings :rating='rating'></ratings>"
 });

@@ -11,6 +11,7 @@
 
       <div class="premium-recipe-wrapper">
         <RecipeCard
+          class="m-b-10"
           v-for="(recipe, index) in recipes"
           :key="index"
           :cardType="recipe.cardType"

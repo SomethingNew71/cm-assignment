@@ -26,6 +26,17 @@
   text-transform: uppercase;
 }
 
+// This is an accessibility(a11y) specific class for allowing screen readers to see something without showing it to sighted users
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}
+
 // Truncation helper
 .truncate {
   display: -webkit-box;

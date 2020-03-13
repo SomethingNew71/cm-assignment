@@ -1,5 +1,7 @@
 <template>
   <div class="star-rating" ref="starRating">
+    <!-- This is visually hidden but availble to screen readers and crawlers -->
+    <p class="visually-hidden">Rating of {{ rating }} out of 5 stars</p>
     <template v-for="(star, index) in computedArray">
       <!-- Full star -->
       <img

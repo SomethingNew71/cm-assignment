@@ -3,7 +3,10 @@
     role="link"
     tabindex="0"
     class="card"
-    :class="{ compact: cardType === 'compact' }"
+    :class="{
+      compact: cardType === 'compact',
+      'text-color-white': cardType === 'compact'
+    }"
   >
     <div class="overlay"></div>
     <div class="card-image p-l-10">
@@ -29,7 +32,7 @@
         v-else-if="cardType === 'compact'"
         class="card-image-header p-t-25 p-l-10 text-left"
       >
-        <h1 class="text-uppercase">Recipe of the Day</h1>
+        <h1 class="text-uppercase text-color-brand">Recipe of the Day</h1>
         <h2 class="truncate">{{ title }}</h2>
         <ratings :rating="rating" />
         <a href="#" class="total-review-count" v-if="showReviewCount">
@@ -226,8 +229,6 @@ export default {
   }
 
   &.compact {
-    color: $white;
-
     .card-image {
       background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url(../assets/ketobeef.jpg);
@@ -236,7 +237,6 @@ export default {
       .card-image-header {
         h1 {
           font-size: 16px;
-          color: $brandColor;
         }
         h2 {
           font-size: 20px;
@@ -275,7 +275,6 @@ export default {
         a,
         .macros {
           font-size: 16px;
-          color: $white;
           display: flex;
         }
       }
