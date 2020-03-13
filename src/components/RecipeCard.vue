@@ -3,7 +3,7 @@
     role="link"
     tabindex="0"
     class="card"
-    v-bind:class="{ compact: cardType === 'compact' }"
+    :class="{ compact: cardType === 'compact' }"
   >
     <div class="overlay"></div>
     <div class="card-image">
@@ -26,7 +26,11 @@
       <div v-else-if="cardType === 'compact'" class="card-image-header">
         <h1>RECIPE OF THE DAY</h1>
         <h2>{{ title | truncate(66, "...") }}</h2>
-        <ratings :config="ratings"></ratings>
+        <ratings
+          :rating="rating"
+          :reviewAmount="reviewAmount"
+          :emptyRatingColor="'#ffffff'"
+        />
         <div class="stats">
           <p class="time">{{ length | duration }}</p>
           <p class="energy-units" v-if="energyUnits === 'Kj'">
@@ -59,7 +63,7 @@
         </h1>
       </div>
       <div class="row">
-        <ratings :config="ratings"></ratings>
+        <ratings :rating="rating" :reviewAmount="reviewAmount" />
       </div>
       <div class="row stats">
         <p class="time">{{ length | duration }}</p>
@@ -92,7 +96,8 @@ export default {
     favorite: Boolean,
     length: String,
     title: String,
-    ratings: Object,
+    rating: Number,
+    reviewAmount: Number,
     carbs: String,
     protein: String,
     fats: String

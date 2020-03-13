@@ -20,7 +20,8 @@
           :favorite="recipe.favorite"
           :length="recipe.length"
           :title="recipe.title"
-          :ratings="recipe.ratings"
+          :rating="recipe.rating"
+          :reviewAmount="recipe.reviewAmount"
           :macros="recipe.macros"
           :carbs="recipe.carbs"
           :protein="recipe.protein"
@@ -49,15 +50,8 @@ export default {
           favorite: false,
           length: "PT3500S",
           title: "Low Carb Thai Chicken Curry with Coconut Cauliflower Rice",
-          ratings: {
-            rating: 3.7,
-            amountOfReviews: 200,
-            style: {
-              fullStarColor: "#ed8a19",
-              emptyStarColor: "#737373"
-            },
-            showReviewCount: true
-          },
+          rating: 2.5,
+          reviewAmount: 200,
           carbs: "20g",
           protein: "16g",
           fats: "6g"
@@ -69,15 +63,8 @@ export default {
           favorite: false,
           length: "PT3500S",
           title: "Keto Italian Beef With Cabbage Noodles",
-          ratings: {
-            rating: 4.2,
-            amountOfReviews: 963,
-            style: {
-              fullStarColor: "#ed8a19",
-              emptyStarColor: "#FFF"
-            },
-            showReviewCount: false
-          },
+          rating: 4.5,
+          reviewAmount: 200,
           carbs: "40g",
           protein: "200g",
           fats: "5g"

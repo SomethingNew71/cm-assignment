@@ -1,48 +1,63 @@
 <template>
   <div class="ratings">
     <div v-for="(star, index) in stars" :key="index" class="star-container">
+      <!-- I chose to hard code the SVG's directly into the template to give me fine tooth control
+      over the colors -->
+      <!-- Full star -->
       <svg
-        class="star-svg"
-        :style="[
-          { fill: `url(#gradient${star.raw})` },
-          { width: style.starWidth },
-          { height: style.starHeight }
-        ]"
+        width="12"
+        height="12"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <polygon :points="getStarPoints" style="fill-rule:nonzero;" />
-        <defs>
-          <linearGradient :id="`gradient${star.raw}`">
-            <stop
-              id="stop1"
-              :offset="star.percent"
-              stop-opacity="1"
-              :stop-color="getFullFillColor(star)"
-            ></stop>
-            <stop
-              id="stop2"
-              :offset="star.percent"
-              stop-opacity="0"
-              :stop-color="getFullFillColor(star)"
-            ></stop>
-            <stop
-              id="stop3"
-              :offset="star.percent"
-              stop-opacity="1"
-              :stop-color="style.emptyStarColor"
-            ></stop>
-            <stop
-              id="stop4"
-              offset="100%"
-              stop-opacity="1"
-              :stop-color="style.emptyStarColor"
-            ></stop>
-          </linearGradient>
-        </defs>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M6 9.644L9.66 12l-.971-4.44 3.234-2.987-4.26-.386L6 0 4.335 4.187l-4.259.386L3.31 7.56 2.34 12 6 9.644z"
+          :fill="fullColor"
+        />
+      </svg>
+      <!-- Half star -->
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M0 0h24v24H0V0z" fill="#fff" />
+        <path
+          opacity=".5"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 18.074L18.18 22l-1.64-7.4L22 9.621l-7.19-.642L12 2 9.19 8.979 2 9.62 7.46 14.6 5.82 22 12 18.074z"
+          :fill="emptyColor"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 18.074V2L9.19 8.979 2 9.62 7.46 14.6 5.82 22 12 18.074z"
+          :fill="fullColor"
+        />
+      </svg>
+      <!-- Empty star -->
+      <svg
+        width="20"
+        height="20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          opacity=".5"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M10 16.074L16.18 20l-1.64-7.4L20 7.621l-7.19-.642L10 0 7.19 6.979 0 7.621 5.46 12.6 3.82 20 10 16.074z"
+          :fill="emptyColor"
+        />
       </svg>
     </div>
-    <div class="total" v-if="config.showReviewCount">
+    <div class="total">
       <a href="#">
-        <span id="review-count">{{ config.amountOfReviews }}</span> Reviews
+        <span id="review-count">{{ reviewAmount }}</span> Reviews
       </a>
     </div>
   </div>
@@ -52,114 +67,36 @@
 export default {
   // For the dynamic configuration of the stars I used some code I found online.
   // So the code below this line is pulled form https://codesandbox.io/s/9846q4oz4r for reference
-  props: ["config"],
-  data() {
-    return {
-      stars: [],
-      emptyStar: 0,
-      fullStar: 1,
-      totalStars: 5,
-      style: {
-        fullStarColor: "#FDA01E",
-        emptyStarColor: "#D4D6D9",
-        starWidth: 14,
-        starHeight: 14
+  props: {
+    rating: {
+      type: Number,
+      validator: value => {
+        return value >= 0 || value <= 5;
       }
-    };
-  },
-  computed: {
-    getStarPoints() {
-      let centerX = this.style.starWidth / 2;
-      let centerY = this.style.starHeight / 2;
-      let innerCircleArms = 5;
-      let innerRadius = this.style.starWidth / innerCircleArms;
-      let innerOuterRadiusRatio = 2.5;
-      let outerRadius = innerRadius * innerOuterRadiusRatio;
-
-      return this.calcStarPoints(
-        centerX,
-        centerY,
-        innerCircleArms,
-        innerRadius,
-        outerRadius
-      );
-    }
+    },
+    reviewAmount: Number,
+    fullColor: {
+      type: String,
+      default: "#FDA01E"
+    },
+    emptyColor: {
+      type: String,
+      default: "#D4D6D9"
+    },
+    showRating: {
+      type: Boolean,
+      default: true
+    },
   },
   methods: {
-    calcStarPoints(
-      centerX,
-      centerY,
-      innerCircleArms,
-      innerRadius,
-      outerRadius
-    ) {
-      let angle = Math.PI / innerCircleArms;
-      let angleOffsetToCenterStar = 60;
+    determineStars() {
+      const starPercentage = (this.rating / 5) * 100;
 
-      let totalArms = innerCircleArms * 2;
-      let points = "";
-      for (let i = 0; i < totalArms; i++) {
-        let isEvenIndex = i % 2 == 0;
-        let r = isEvenIndex ? outerRadius : innerRadius;
-        let currX = centerX + Math.cos(i * angle + angleOffsetToCenterStar) * r;
-        let currY = centerY + Math.sin(i * angle + angleOffsetToCenterStar) * r;
-        points += currX + "," + currY + " ";
-      }
-      return points;
-    },
-    initStars() {
-      for (let i = 0; i < this.totalStars; i++) {
-        this.stars.push({
-          raw: this.emptyStar,
-          percent: this.emptyStar + "%"
-        });
-      }
-    },
-    setStars() {
-      let fullStarsCounter = Math.floor(this.config.rating);
-      for (let i = 0; i < this.stars.length; i++) {
-        if (fullStarsCounter !== 0) {
-          this.stars[i].raw = this.fullStar;
-          this.stars[i].percent = this.calcStarFullness(this.stars[i]);
-          fullStarsCounter--;
-        } else {
-          let surplus = Math.round((this.config.rating % 1) * 10) / 10;
-          let roundedOneDecimalPoint = Math.round(surplus * 10) / 10;
-          this.stars[i].raw = roundedOneDecimalPoint;
-          return (this.stars[i].percent = this.calcStarFullness(this.stars[i]));
-        }
-      }
-    },
-    setConfigData() {
-      if (this.config) {
-        this.setBindedProp(this.style, this.config.style, "fullStarColor");
-        this.setBindedProp(this.style, this.config.style, "emptyStarColor");
-        this.setBindedProp(this.style, this.config.style, "starWidth");
-        this.setBindedProp(this.style, this.config.style, "starHeight");
-        if (this.config.isIndicatorActive) {
-          this.isIndicatorActive = this.config.isIndicatorActive;
-        }
-      }
-    },
-    getFullFillColor(starData) {
-      return starData.raw !== this.emptyStar
-        ? this.style.fullStarColor
-        : this.style.emptyStarColor;
-    },
-    calcStarFullness(starData) {
-      let starFullnessPercent = starData.raw * 100 + "%";
-      return starFullnessPercent;
-    },
-    setBindedProp(localProp, propParent, propToBind) {
-      if (propParent[propToBind]) {
-        localProp[propToBind] = propParent[propToBind];
-      }
+      console.log(starPercentage);
     }
   },
   created() {
-    this.initStars();
-    this.setStars();
-    this.setConfigData();
+    this.determineStars();
   }
 };
 </script>
