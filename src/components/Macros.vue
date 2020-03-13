@@ -1,57 +1,65 @@
 <template>
-  <div class="macros">
+  <ul class="macros">
     <!-- With the Aria Labels and the titles you will get browser based tooltips providing
     the complete name of the element when you hover. -->
-    <span aria-label="Carbs" title="Carbs" class="carbs">
+    <li aria-label="Carbs" title="Carbs" class="icon carbs">
       {{ carbs }}
-    </span>
-    <span aria-label="Protien" title="Protien" class="protein">
+    </li>
+    <li aria-label="Protien" title="Protien" class="icon protein">
       {{ protein }}
-    </span>
-    <span aria-label="Fats" title="Fats" class="fats">
+    </li>
+    <li aria-label="Fats" title="Fats" class="icon fats">
       {{ fats }}
-    </span>
-  </div>
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      carbs: "20g",
-      protein: "16g",
-      fats: "6g"
-    };
+  props: {
+    carbs: String,
+    protein: String,
+    fats: String
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .macros {
-  span {
-    padding-right: 3px;
-  }
+  // Normalized the padding and margin to allow card to determine sizing.
+  margin: 0;
+  padding-left: 0;
 
-  .carbs:before,
-  .protein:before,
-  .fats:before {
-    display: inline-block;
-    content: "•";
-    padding-right: 5px;
-    font-size: 28px;
-    height: 6px;
-    width: 6px;
-    position: relative;
-    top: 3px;
-  }
-  .carbs:before {
-    color: #f94642;
-  }
-  .protein:before {
-    color: #3177bb;
-  }
-  .fats:before {
-    color: #fda120;
+  .icon {
+    display: inline;
+    list-style: none;
+
+    // Same thing here with padding
+    &:nth-child(-n + 2) {
+      padding-right: 5px;
+    }
+
+    &:before {
+      display: inline-block;
+      content: "•";
+      padding-right: 5px;
+      font-size: 28px;
+      height: 6px;
+      width: 6px;
+      position: relative;
+      top: 3px;
+    }
+
+    // Created global app varibales to normalize colors
+    &.carbs:before {
+      color: $carbs;
+    }
+    &.protein:before {
+      color: $protein;
+    }
+    &.fats:before {
+      color: $fats;
+    }
   }
 }
 </style>

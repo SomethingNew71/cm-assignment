@@ -1,0 +1,17 @@
+#app {
+  font-family: "proxima-nova", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: $fontColor;
+  margin-top: 60px;
+}
+
+a {
+  color: $brandColor;
+  text-decoration: none;
+
+  &:hover {
+    color: $brandColor;
+  }
+}

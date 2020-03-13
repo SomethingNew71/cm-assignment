@@ -46,7 +46,7 @@
       </div>
       <!-- Compact card Link layout for recipe of the day card -->
       <div v-else-if="cardType === 'compact'" class="card-image-footer">
-        <macros></macros>
+        <macros :carbs="carbs" :protein="protein" :fats="fats" />
         <a href="#"> Learn More</a>
       </div>
     </div>
@@ -70,7 +70,7 @@
         <p class="energy-units" v-else>
           <span id="energy-value">{{ calories }}</span> {{ energyUnits }}
         </p>
-        <macros></macros>
+        <macros :carbs="carbs" :protein="protein" :fats="fats" />
       </div>
     </div>
   </div>
@@ -92,7 +92,10 @@ export default {
     favorite: Boolean,
     length: String,
     title: String,
-    ratings: Object
+    ratings: Object,
+    carbs: String,
+    protein: String,
+    fats: String
   },
   filters: {
     truncate(text, length, suffix) {
@@ -211,10 +214,6 @@ export default {
         .macros {
           color: #fff;
           display: flex;
-        }
-
-        .macros {
-          padding-left: 15px;
         }
 
         a {

@@ -21,6 +21,10 @@
           :length="recipe.length"
           :title="recipe.title"
           :ratings="recipe.ratings"
+          :macros="recipe.macros"
+          :carbs="recipe.carbs"
+          :protein="recipe.protein"
+          :fats="recipe.fats"
         />
       </div>
     </div>
@@ -53,7 +57,10 @@ export default {
               emptyStarColor: "#737373"
             },
             showReviewCount: true
-          }
+          },
+          carbs: "20g",
+          protein: "16g",
+          fats: "6g"
         },
         {
           cardType: "compact",
@@ -70,34 +77,16 @@ export default {
               emptyStarColor: "#FFF"
             },
             showReviewCount: false
-          }
+          },
+          carbs: "40g",
+          protein: "200g",
+          fats: "5g"
         }
       ]
     };
   }
 };
 </script>
-
-<style lang="scss">
-#app {
-  font-family: "proxima-nova", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-// Global link styles
-a {
-  color: #1ba677;
-  text-decoration: none;
-
-  &:hover {
-    color: #1ba677;
-  }
-}
-</style>
 
 <style lang="scss" scoped>
 .cm-logo-wrapper {
