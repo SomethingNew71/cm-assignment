@@ -36,27 +36,28 @@
         </div>
       </div>
       <!-- Compact card image layout for recipe of the day card -->
-      <div v-else-if="cardType === 'compact'" class="card-image-header">
+      <div
+        v-else-if="cardType === 'compact'"
+        class="card-image-header p-t-25 p-l-10 text-left"
+      >
         <h1 class="text-uppercase">Recipe of the Day</h1>
         <h2 class="truncate">{{ title }}</h2>
-        <ratings name="Test"/>
+        <!-- <ratings name="Test" /> -->
         <div class="stats">
-          <p class="time">{{ prettyDuration }}</p>
-          <p class="energy-units" v-if="energyUnits === 'Kj'">
-            <span id="energy-value">{{ calories * 4.184 }}</span>
-            {{ energyUnits }}
+          <p class="icon time">{{ prettyDuration }}</p>
+          <p class="icon energy-units" v-if="energyMeasurement === 'Kj'">
+            <span id="energy-value">{{ convertCaloriesToKJ }}</span>
+            {{ energyMeasurement }}
           </p>
-          <p class="energy-units" v-else>
-            <span id="energy-value">{{ calories }} </span> {{ energyUnits }}
+          <p class="icon energy-units" v-else>
+            <span id="energy-value">{{ calories }} </span>
+            {{ energyMeasurement }}
           </p>
         </div>
       </div>
 
       <!-- Full card Link layout for premium recipe card -->
-      <div
-        v-if="cardType === 'full'"
-        class="card-image-footer row p-l-15 p-b-15 "
-      >
+      <div v-if="cardType === 'full'" class="card-image-footer row p-l-5 p-b-5">
         <div class="premium-recipe brand-button light">
           <img src="../assets/trophy.svg" alt="Image of Trophy" />
           <span> Premium Recipe</span>
@@ -64,9 +65,14 @@
       </div>
 
       <!-- Compact card Link layout for recipe of the day card -->
-      <div v-else-if="cardType === 'compact'" class="card-image-footer">
+      <div
+        v-else-if="cardType === 'compact'"
+        class="card-image-footer p-l-20 p-b-20 p-r-30"
+      >
         <macros :carbs="carbs" :protein="protein" :fats="fats" />
-        <a href="#"> Learn More</a>
+        <a href="#" class="brand-button light m-r-40">
+          Learn More
+        </a>
       </div>
     </div>
 
@@ -80,12 +86,12 @@
       </div>
       <div class="row stats p-b-15 p-r-10">
         <p class="icon time">{{ prettyDuration }}</p>
-        <p class="icon energy-units p-l-10" v-if="energyUnits === 'Kj'">
+        <p class="icon energy-units p-l-10" v-if="energyMeasurement === 'Kj'">
           <span id="energy-value">{{ convertedCalories }}</span>
-          {{ energyUnits }}
+          {{ energyMeasurement }}
         </p>
-        <p class="energy-units" v-else>
-          <span id="energy-value">{{ calories }}</span> {{ energyUnits }}
+        <p class="icon energy-units" v-else>
+          <span id="energy-value">{{ calories }}</span> {{ energyMeasurement }}
         </p>
         <macros :carbs="carbs" :protein="protein" :fats="fats" />
       </div>
@@ -110,7 +116,7 @@ export default {
         return value === "compact" || value === "full";
       }
     },
-    energyUnits: {
+    energyMeasurement: {
       type: String,
       validator: value => {
         return value === "calories" || value === "Kj";
@@ -181,11 +187,7 @@ export default {
     }
   }
   .card-image {
-    background: linear-gradient(
-        0deg,
-        rgba(64, 64, 64, 0.3),
-        rgba(64, 64, 64, 0.3)
-      ),
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
       url(../assets/meal.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -215,6 +217,8 @@ export default {
     color: $white;
 
     .card-image {
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(../assets/meal.png);
       .card-image-header {
         h1 {
           font-size: 16px;
@@ -228,29 +232,27 @@ export default {
           display: flex;
           align-items: flex-start;
 
-          .time,
-          .energy-units {
+          .icon {
             display: flex;
             flex-flow: row;
             justify-content: space-between;
             font-size: 14px;
-          }
-          .time {
-            &:before {
+
+            &.time:before {
               background-image: url(../assets/clock-white.svg);
             }
-          }
-          .energy-units {
-            padding-left: 5px;
-            &:before {
-              background-image: url(../assets/flame-white.svg);
+            &.energy-units {
+              padding-left: 5px;
+              &:before {
+                background-image: url(../assets/flame-white.svg);
+              }
             }
           }
         }
       }
       .card-image-footer {
         display: flex;
-        background-color: rgba(64, 64, 64, 0);
+        background-color: rgba(0, 64, 64, 0);
         width: 100%;
         flex-flow: row;
         align-items: baseline;
@@ -258,6 +260,7 @@ export default {
 
         a,
         .macros {
+          font-size: 16px;
           color: $white;
           display: flex;
         }

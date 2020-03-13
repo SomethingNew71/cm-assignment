@@ -22,7 +22,7 @@ export const Main = () => ({
       default: boolean("Is favorite?", false)
     },
     length: {
-      default: text("ISO_8601 Timestamp", "PT3500S")
+      default: text("Time in total minutes", "87")
     }
   },
   // I have this @click configured to their documentation however I was not able to get the action to trigger.

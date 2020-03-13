@@ -15,7 +15,7 @@
           :key="index"
           :cardType="recipe.cardType"
           @click.native="$emit('test-click')"
-          :energyUnits="recipe.energyUnits"
+          :energyMeasurement="recipe.energyMeasurement"
           :calories="recipe.calories"
           :favorite="recipe.favorite"
           :length="recipe.length"
@@ -46,7 +46,7 @@ export default {
       recipes: [
         {
           cardType: "full",
-          energyUnits: "Kj",
+          energyMeasurement: "Kj",
           calories: 483,
           favorite: false,
           length: "59",
@@ -60,7 +60,7 @@ export default {
         },
         {
           cardType: "compact",
-          energyUnits: "calories",
+          energyMeasurement: "calories",
           calories: 483,
           favorite: false,
           length: "74",
