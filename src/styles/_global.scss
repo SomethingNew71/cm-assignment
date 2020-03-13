@@ -15,3 +15,31 @@ a {
     color: $brandColor;
   }
 }
+
+
+// Truncation helper
+.truncate-overflow {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+// Overlay helper
+.overlay {
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  position: absolute;
+  padding: 0;
+  transition: opacity 0.5s;
+
+  &:hover {
+    opacity: 0.9;
+    transition: opacity 0.5s;
+  }
+}

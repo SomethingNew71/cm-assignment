@@ -25,11 +25,11 @@
       <!-- Compact card image layout for recipe of the day card -->
       <div v-else-if="cardType === 'compact'" class="card-image-header">
         <h1>RECIPE OF THE DAY</h1>
-        <h2>{{ title | truncate(66, "...") }}</h2>
+        <h2 class="truncate-overflow">{{ title }}</h2>
         <ratings
           :rating="rating"
           :reviewAmount="reviewAmount"
-          :emptyRatingColor="'#ffffff'"
+          :emptyRatingColor="'$whitefff'"
         />
         <div class="stats">
           <p class="time">{{ length | duration }}</p>
@@ -58,8 +58,8 @@
     <!-- Only show the bottom contents if its the full card -->
     <div v-if="cardType === 'full'" class="card-content">
       <div class="row">
-        <h1>
-          {{ title | truncate(66, "...") }}
+        <h1 class="truncate-overflow">
+          {{ title }}
         </h1>
       </div>
       <div class="row">
@@ -101,11 +101,6 @@ export default {
     carbs: String,
     protein: String,
     fats: String
-  },
-  filters: {
-    truncate(text, length, suffix) {
-      return text.substring(0, length) + suffix;
-    }
   }
 };
 </script>
@@ -164,7 +159,7 @@ export default {
         padding-left: 15px;
 
         h1 {
-          color: #1ba677;
+          color: $brandColor;
           margin: 0;
           font-style: normal;
           font-weight: bold;
@@ -173,7 +168,7 @@ export default {
         }
         h2 {
           margin: 0;
-          color: #fff;
+          color: $white;
           text-align: left;
           font-size: 20px;
         }
@@ -186,7 +181,7 @@ export default {
           .energy-units {
             margin-top: 0;
             padding-top: 5px;
-            color: #fff;
+            color: $white;
             display: flex;
             flex-flow: row;
             justify-content: space-between;
@@ -217,7 +212,7 @@ export default {
 
         a,
         .macros {
-          color: #fff;
+          color: $white;
           display: flex;
         }
 
@@ -229,24 +224,6 @@ export default {
           margin-bottom: 10px;
         }
       }
-    }
-  }
-
-  .overlay {
-    background: rgba(255, 255, 255, 0.2);
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    top: 0;
-    left: 0;
-    position: absolute;
-    padding: 0;
-    transition: opacity 0.5s;
-
-    &:hover {
-      opacity: 0.9;
-      transition: opacity 0.5s;
     }
   }
 
@@ -276,7 +253,7 @@ export default {
       border-radius: 12px;
       padding: 2px 10px 2px 10px;
       margin: 12px;
-      color: #fff;
+      color: $white;
     }
   }
 
@@ -290,7 +267,6 @@ export default {
       font-style: normal;
       font-weight: bold;
       font-size: 18px;
-      line-height: 20px;
     }
   }
 }
