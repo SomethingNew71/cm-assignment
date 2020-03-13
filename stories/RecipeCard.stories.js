@@ -1,16 +1,6 @@
 // Import my duration filter to ensure the time is rendered properly
-import moment from "moment";
-import momentDurationFormatSetup from "moment-duration-format";
-momentDurationFormatSetup(moment);
-typeof moment.duration.fn.format === "function";
-typeof moment.duration.format === "function";
-
 import { action } from "@storybook/addon-actions";
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
-import Vue from "vue";
-Vue.filter("duration", value => {
-  return moment.duration(value).format("h [hrs], m [min]");
-});
 import RecipeCard from "../src/components/RecipeCard.vue";
 
 export default {

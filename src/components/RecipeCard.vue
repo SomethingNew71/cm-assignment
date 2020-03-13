@@ -39,13 +39,9 @@
       <div v-else-if="cardType === 'compact'" class="card-image-header">
         <h1 class="text-uppercase">Recipe of the Day</h1>
         <h2 class="truncate">{{ title }}</h2>
-        <ratings
-          :rating="rating"
-          :reviewAmount="reviewAmount"
-          :emptyRatingColor="'$whitefff'"
-        />
+        <ratings name="Test"/>
         <div class="stats">
-          <p class="time">{{ length | duration }}</p>
+          <p class="time">{{ prettyDuration }}</p>
           <p class="energy-units" v-if="energyUnits === 'Kj'">
             <span id="energy-value">{{ calories * 4.184 }}</span>
             {{ energyUnits }}
@@ -80,10 +76,10 @@
         <h1 class="truncate">{{ title }}</h1>
       </div>
       <div class="row">
-        <ratings :rating="rating" :reviewAmount="reviewAmount" />
+        <ratings name="Test" />
       </div>
       <div class="row stats p-b-15 p-r-10">
-        <p class="icon time">{{ length | duration }}</p>
+        <p class="icon time">{{ prettyDuration }}</p>
         <p class="icon energy-units p-l-10" v-if="energyUnits === 'Kj'">
           <span id="energy-value">{{ convertedCalories }}</span>
           {{ energyUnits }}
@@ -100,7 +96,7 @@
 <script>
 import macros from "./Macros";
 import ratings from "./Ratings";
-import { convertCaloriesToKJ } from "@/utils";
+import { convertCaloriesToKJ, calculateDuration } from "@/utils";
 
 export default {
   components: {
@@ -135,6 +131,12 @@ export default {
     convertedCalories() {
       // Compute this value at the beginning instead of in the template
       return convertCaloriesToKJ(this.calories);
+    },
+    prettyDuration() {
+      // Compute a pretty verision of duration. Must take in minute value
+      // I think in a larger applicaiton ISO would be better long term since
+      // its used as a standard across front end apps.
+      return calculateDuration(this.length);
     }
   }
 };
