@@ -82,7 +82,7 @@
         <h1 class="truncate">{{ title }}</h1>
       </div>
       <div class="row">
-        <ratings name="Test" />
+        <ratings :rating="rating" />
       </div>
       <div class="row stats p-b-15 p-r-10">
         <p class="icon time">{{ prettyDuration }}</p>
