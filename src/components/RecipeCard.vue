@@ -123,7 +123,7 @@ export default {
     },
     calories: Number,
     favorite: Boolean,
-    length: String,
+    length: Number,
     title: String,
     rating: Number,
     reviewAmount: Number,

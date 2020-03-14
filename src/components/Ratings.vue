@@ -55,8 +55,10 @@ export default {
         starArray.push("half");
       }
       // Determine the amount of empty stars
-      if (starArray.length < 4) {
-        for (let index = 0; index <= 5 - starArray.length; index++) {
+      if (starArray.length < 5) {
+        // eslint-disable-next-line
+
+        for (let index = 0; starArray.length < 5; index++) {
           starArray.push("empty");
         }
       }
